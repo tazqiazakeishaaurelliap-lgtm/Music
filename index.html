@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Music Player Modern | GitHub</title>
-  
+  <title>Nebula Player | Modern Music</title>
   <style>
     * {
       margin: 0;
@@ -13,195 +12,194 @@
     }
 
     body {
-      /* Background gradasi kekinian: perpaduan ungu pastel, biru soft, dan sentuhan magenta */
-      background: linear-gradient(145deg, #c084fc 0%, #60a5fa 45%, #f472b6 100%);
+      /* Gradasi kekinian dengan nuansa neon gelap ke ungu terang */
+      background: radial-gradient(circle at 10% 30%, #1e1a3e, #0b0b2b, #2a1a4a);
       background-attachment: fixed;
-      font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Poppins', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
       padding: 20px;
-      /* efek noise halus biar makin modern (optional) */
       position: relative;
     }
 
-    /* efek grain / tekstur micro untuk kesan premium */
+    /* Partikel bintang kecil untuk kesan modern & space vibe */
     body::before {
-      content: "";
+      content: '';
       position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMDYiLz48L3N2Zz4=');
+      background-image: radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                        radial-gradient(1px 1px at 80px 200px, #f0e6ff, rgba(0,0,0,0));
+      background-size: 200px 200px, 150px 150px;
       background-repeat: repeat;
-      pointer-events: none;
       opacity: 0.2;
+      pointer-events: none;
       z-index: 0;
     }
 
     .player-card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      border-radius: 40px;
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255,255,255,0.3) inset;
-      padding: 28px 24px 32px 24px;
+      background: rgba(20, 15, 45, 0.7);
+      backdrop-filter: blur(16px);
+      border-radius: 48px;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+      padding: 28px 24px 36px;
       text-align: center;
       width: 100%;
-      max-width: 380px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      max-width: 400px;
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
       z-index: 2;
     }
 
     .player-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 32px 55px rgba(0, 0, 0, 0.25);
+      transform: translateY(-6px);
+      box-shadow: 0 35px 55px rgba(0, 0, 0, 0.5);
     }
 
     h2 {
-      background: linear-gradient(135deg, #2d2b6b, #854d8c);
+      background: linear-gradient(120deg, #e0c3ff, #b77eff, #9f5eff);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      font-weight: 700;
-      font-size: 1.9rem;
-      letter-spacing: -0.3px;
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: -0.5px;
       margin-bottom: 6px;
     }
 
     .subhead {
-      color: #5b5b6e;
-      font-size: 0.8rem;
+      color: #bcb0e6;
+      font-size: 0.75rem;
       font-weight: 500;
-      background: rgba(230, 230, 250, 0.5);
+      background: rgba(80, 70, 120, 0.4);
       display: inline-block;
-      padding: 4px 14px;
-      border-radius: 40px;
+      padding: 4px 16px;
+      border-radius: 50px;
       backdrop-filter: blur(4px);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     #current-title {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
-      margin: 16px 0 12px 0;
-      color: #1f1b3c;
-      background: rgba(255,255,240,0.6);
-      padding: 8px 16px;
+      margin: 12px 0 14px;
+      padding: 10px 14px;
+      background: rgba(10, 8, 25, 0.65);
+      backdrop-filter: blur(8px);
       border-radius: 60px;
       display: inline-block;
-      backdrop-filter: blur(4px);
-      transition: all 0.2s;
+      color: #f0eaff;
+      letter-spacing: -0.2px;
+      border: 1px solid rgba(255, 200, 255, 0.2);
+      max-width: 100%;
+      word-break: break-word;
     }
 
-    /* Styling audio player modern */
+    /* Styling audio player - transparan & modern */
     audio {
       width: 100%;
-      margin: 10px 0 15px 0;
+      margin: 15px 0 10px;
       border-radius: 60px;
-      background: #f3f4fc;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background: #1f1b38;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
     }
-
     audio::-webkit-media-controls-panel {
-      background-color: #f9fafc;
+      background-color: #2a254b;
       border-radius: 60px;
+    }
+    audio::-webkit-media-controls-play-button {
+      background-color: #a77cff;
+      border-radius: 50%;
     }
 
     .playlist {
       text-align: left;
-      margin-top: 25px;
-      border-top: 1.5px solid rgba(128, 128, 160, 0.25);
-      padding-top: 18px;
+      margin-top: 28px;
+      border-top: 1px solid rgba(160, 130, 255, 0.3);
+      padding-top: 20px;
     }
 
     .playlist h4 {
       font-weight: 600;
-      font-size: 1rem;
-      color: #1e293b;
+      font-size: 0.9rem;
+      color: #ddd2ff;
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 14px;
-      letter-spacing: -0.2px;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
     }
 
     .playlist h4:before {
-      content: "🎧";
-      font-size: 1.1rem;
+      content: "✨";
+      font-size: 1rem;
     }
 
-    /* daftar lagu dengan efek modern */
     .song-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.75);
+      padding: 10px 14px;
+      background: rgba(30, 25, 65, 0.65);
       backdrop-filter: blur(4px);
-      margin-bottom: 8px;
-      border-radius: 28px;
+      margin-bottom: 10px;
+      border-radius: 40px;
       cursor: pointer;
       transition: all 0.2s ease;
-      border: 1px solid rgba(255,255,255,0.5);
+      border: 1px solid rgba(180, 140, 255, 0.2);
       font-weight: 500;
-      color: #1e1f2c;
-      font-size: 0.9rem;
+      color: #ece5ff;
+      font-size: 0.85rem;
     }
 
     .song-item:hover {
-      background: rgba(255, 255, 255, 0.98);
+      background: rgba(75, 60, 140, 0.85);
       transform: scale(1.02);
-      border-color: #c4b5fd;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      border-color: #b794f4;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
     }
 
-    /* nomor lagu lebih stylish */
+    /* Nomor lagu rapi & modern */
     .song-item::before {
-      content: "♪";
-      font-size: 1.2rem;
-      font-weight: normal;
-      color: #8b5cf6;
-      width: 28px;
+      content: "🎵";
+      font-size: 1rem;
+      width: 32px;
       text-align: center;
+      opacity: 0.8;
     }
 
-    /* menyesuaikan setiap item tanpa mengacuhkan konten */
-    .song-item:nth-child(1)::before { content: "1"; font-weight: bold; font-family: monospace; background: #e0e7ff; width: 28px; border-radius: 30px; }
-    .song-item:nth-child(2)::before { content: "2"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
-    .song-item:nth-child(3)::before { content: "3"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
-    .song-item:nth-child(4)::before { content: "4"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
-    .song-item:nth-child(5)::before { content: "5"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
-    .song-item:nth-child(6)::before { content: "6"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
-    .song-item:nth-child(7)::before { content: "7"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
-    .song-item:nth-child(8)::before { content: "8"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
-    .song-item:nth-child(9)::before { content: "9"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
-    .song-item:nth-child(10)::before { content: "10"; font-weight: bold; background: #e0e7ff; border-radius: 30px; }
+    /* override dengan nomor urut otomatis dari CSS agar tidak duplikasi */
+    .song-item:nth-child(1)::before { content: "1"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; align-items: center; padding: 2px 0; }
+    .song-item:nth-child(2)::before { content: "2"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
+    .song-item:nth-child(3)::before { content: "3"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
+    .song-item:nth-child(4)::before { content: "4"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
+    .song-item:nth-child(5)::before { content: "5"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
+    .song-item:nth-child(6)::before { content: "6"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
+    .song-item:nth-child(7)::before { content: "7"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
+    .song-item:nth-child(8)::before { content: "8"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
+    .song-item:nth-child(9)::before { content: "9"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
+    .song-item:nth-child(10)::before { content: "10"; font-weight: bold; background: #3a2d6e; width: 32px; border-radius: 30px; display: inline-flex; justify-content: center; }
 
-    /* Tambahan efek shimmer/glow saat diputar (optional) */
-    @keyframes subtlePulse {
-      0% { text-shadow: 0 0 0px rgba(139,92,246,0); }
-      100% { text-shadow: 0 0 5px rgba(139,92,246,0.4); }
-    }
-    .playing-now {
-      background: linear-gradient(120deg, #f8f0ff, #ede9fe);
-      border-left: 5px solid #8b5cf6;
-      font-weight: 600;
+    /* efek lagu yang sedang diputar */
+    .song-item.playing-now {
+      background: linear-gradient(95deg, #5f43b0, #3d2a7a);
+      border-left: 4px solid #e9b0ff;
+      box-shadow: 0 0 8px #b77eff;
+      color: white;
     }
 
-    /* responsif */
-    @media (max-width: 450px) {
+    @media (max-width: 460px) {
       .player-card {
-        padding: 20px 18px;
+        padding: 20px 16px;
       }
       .song-item {
-        padding: 10px 12px;
-        font-size: 0.8rem;
+        padding: 8px 12px;
+        font-size: 0.75rem;
       }
       #current-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -209,138 +207,130 @@
 <body>
 
 <div class="player-card">
-  <h2>✨ Nebula Player</h2>
-  <div class="subhead">✨ stream mellow · modern vibe</div>
+  <h2>✦ NEBULA MUSIC</h2>
+  <div class="subhead">immersive audio · dreamy vibes</div>
   
-  <div id="current-title">🎵 pilih lagu favoritmu</div>
+  <div id="current-title">🎧 pilih lagu favoritmu</div>
   
   <audio id="audio-player" controls preload="metadata"></audio>
 
   <div class="playlist">
-    <h4>Playlist kekinian</h4>
+    <h4>🎶 Playlist kekinian</h4>
     
-    <div class="song-item" data-title="Position - Ariana" data-src="assets/ariana-grande-positions.mp3">
-      1. Position - Ariana Grande
-    </div>
-
-    <div class="song-item" data-title="Hindia - Membasuh" data-src="assets/hindia-membasuh.mp3">
-      2. Hindia - Membasuh
-    </div>
-
-    <div class="song-item" data-title="Armada - Mau Dibawa Kemana" data-src="assets/mau-dibawa-kemana-armada.mp3">
-      3. Armada - Mau Dibawa Kemana
-    </div>
-
-    <div class="song-item" data-title="Kahitna - Titik Nadir" data-src="assets/KAHITNA-Titik Nadir.mp3">
-      4. Kahitna - Titik Nadir
-    </div>
-
-    <div class="song-item" data-title="Kahitna - Mantan Terindah" data-src="assets/KAHITNA-MANTAN TERINDAH.mp3">
-      5. Kahitna - Mantan Terindah
-    </div>
-
-    <div class="song-item" data-title="Marcell - Firasat" data-src="assets/MARCELL-Firasat.mp3">
-      6. Marcell - Firasat
-    </div>
-
-    <div class="song-item" data-title="ACHA SEPTRIASA - IRWANSYAH - My Heart" data-src="assets/ACHA SEPTRIASA - IRWANSYAH-My Heart.mp3">
-      7. Acha & Irwansyah - My Heart
-    </div>
-
-    <div class="song-item" data-title="Hello - Ular Berbisa" data-src="assets/Hello - Ular Berbisa.mp3">
-      8. Hello - Ular Berbisa
-    </div>
-
-    <div class="song-item" data-title="Rossa - Tak Sanggup Lagi" data-src="assets/Rossa - Tak Sanggup Lagi.mp3">
-      9. Rossa - Tak Sanggup Lagi
-    </div>
-
-    <div class="song-item" data-title="Bersenja Gurau - Raim Laode" data-src="assets/Bersenja Gurau - Raim Laode.mp3">
-      10. Raim Laode - Bersenja Gurau
-    </div>
-
-    </div>
+    <!-- Data lagu dengan atribut lengkap -->
+    <div class="song-item" data-title="Position - Ariana Grande" data-src="assets/ariana-grande-positions.mp3">Position - Ariana</div>
+    <div class="song-item" data-title="Hindia - Membasuh" data-src="assets/hindia-membasuh.mp3">Hindia - Membasuh</div>
+    <div class="song-item" data-title="Armada - Mau Dibawa Kemana" data-src="assets/mau-dibawa-kemana-armada.mp3">Armada - Mau Dibawa Kemana</div>
+    <div class="song-item" data-title="Kahitna - Titik Nadir" data-src="assets/KAHITNA-Titik Nadir.mp3">Kahitna - Titik Nadir</div>
+    <div class="song-item" data-title="Kahitna - Mantan Terindah" data-src="assets/KAHITNA-MANTAN TERINDAH.mp3">Kahitna - Mantan Terindah</div>
+    <div class="song-item" data-title="Marcell - Firasat" data-src="assets/MARCELL-Firasat.mp3">Marcell - Firasat</div>
+    <div class="song-item" data-title="ACHA & IRWANSYAH - My Heart" data-src="assets/ACHA SEPTRIASA - IRWANSYAH-My Heart.mp3">Acha & Irwansyah - My Heart</div>
+    <div class="song-item" data-title="Hello - Ular Berbisa" data-src="assets/Hello - Ular Berbisa.mp3">Hello - Ular Berbisa</div>
+    <div class="song-item" data-title="Rossa - Tak Sanggup Lagi" data-src="assets/Rossa - Tak Sanggup Lagi.mp3">Rossa - Tak Sanggup Lagi</div>
+    <div class="song-item" data-title="Raim Laode - Bersenja Gurau" data-src="assets/Bersenja Gurau - Raim Laode.mp3">Raim Laode - Bersenja Gurau</div>
+  </div>
+</div>
 
 <script>
-  // ambil elemen
-  const player = document.getElementById('audio-player');
-  const titleDisplay = document.getElementById('current-title');
-  const allSongs = document.querySelectorAll('.song-item');
-  
-  // variable untuk mengetahui lagu yang sedang aktif (opsional highlight)
-  let currentActiveItem = null;
-  
-  // fungsi play lagu yang lebih modern + highlight visual
-  function putarLagu(judul, lokasiFile, clickedElement) {
-    // update tampilan judul
-    titleDisplay.innerHTML = `🎶 ${judul}`;
-    
-    // set sumber audio
-    player.src = lokasiFile;
-    player.load();
-    
-    // mainkan audio (akan berjalan otomatis setelah load, tapi butuh interaksi? tetap)
-    player.play().catch(e => {
-      // Browsers kadang menolak autoplay karena kebijakan, kita tampilkan info opsional 
-      console.log("Autoplay mungkin butuh interaksi, klik tombol play manual");
-      titleDisplay.innerHTML = `🎧 ${judul} (klik play)`;
+  (function() {
+    const player = document.getElementById('audio-player');
+    const titleDisplay = document.getElementById('current-title');
+    const songItems = document.querySelectorAll('.song-item');
+    let currentActiveItem = null;
+
+    // Fungsi untuk memutar lagu dengan error handling yang baik
+    function playSong(judul, filePath, element) {
+      if (!filePath) {
+        titleDisplay.innerHTML = "⚠️ File tidak ditemukan!";
+        return;
+      }
+
+      // Update judul lagu di player
+      titleDisplay.innerHTML = `🎵 ${judul}`;
+      
+      // Set sumber audio
+      player.src = filePath;
+      player.load();
+      
+      // Coba putar otomatis (karena user klik, biasanya diizinkan)
+      const playPromise = player.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.warn('Autoplay ditolak browser:', error);
+          titleDisplay.innerHTML = `🎧 ${judul} (klik tombol play)`;
+        });
+      }
+      
+      // Hapus highlight dari lagu sebelumnya
+      if (currentActiveItem) {
+        currentActiveItem.classList.remove('playing-now');
+      }
+      // Tambahkan highlight ke lagu yang aktif
+      if (element) {
+        element.classList.add('playing-now');
+        currentActiveItem = element;
+      }
+    }
+
+    // Event listener untuk setiap lagu
+    songItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const judul = item.getAttribute('data-title');
+        const srcFile = item.getAttribute('data-src');
+        
+        if (!srcFile) {
+          titleDisplay.innerHTML = "❌ File audio tidak valid";
+          return;
+        }
+        
+        playSong(judul, srcFile, item);
+      });
     });
     
-    // Hapus efek highlight dari item sebelumnya
-    if (currentActiveItem) {
-      currentActiveItem.classList.remove('playing-now');
-    }
-    // Tambahkan class highlight ke lagu yg sedang diputar
-    if (clickedElement) {
-      clickedElement.classList.add('playing-now');
-      currentActiveItem = clickedElement;
-    }
-  }
-  
-  // pasang event listener untuk setiap lagu di playlist
-  allSongs.forEach(song => {
-    song.addEventListener('click', (e) => {
-      // Ambil data dari atribut data-title dan data-src
-      const judulLagu = song.getAttribute('data-title');
-      const fileLagu = song.getAttribute('data-src');
-      
-      if (judulLagu && fileLagu) {
-        putarLagu(judulLagu, fileLagu, song);
-      } else {
-        // fallback kalau ada yang lupa atribut, tapi di html sudah ada semua
-        console.warn('data attribute tidak lengkap', song);
+    // Penanganan error jika file audio gagal dimuat
+    player.addEventListener('error', (e) => {
+      console.error('Audio error:', e);
+      let errorMsg = "Gagal memuat audio. Periksa jalur file.";
+      if (player.error && player.error.code === 4) {
+        errorMsg = "File tidak ditemukan. Cek kembali folder assets.";
+      }
+      titleDisplay.innerHTML = `⚠️ ${errorMsg}`;
+      // reset highlight sementara
+      if (currentActiveItem) {
+        currentActiveItem.classList.remove('playing-now');
+        currentActiveItem = null;
       }
     });
-  });
-  
-  // Optional: ketika lagu selesai, hapus highlight playing-now? 
-  // bisa ditambahkan agar UX lebih rapi
-  player.addEventListener('ended', () => {
-    if (currentActiveItem) {
-      // kita tidak langsung hapus highlight, bisa biarkan dulu sampai user pilih lagu lain
-      // tapi opsi bagus: hanya tampilkan pesan "lagu selesai"
-      titleDisplay.innerHTML = "🎵 putar lagu selanjutnya~";
-    }
-  });
-  
-  // Jika audio mulai diputar, update judul tetap konsisten (tambahan)
-  player.addEventListener('play', () => {
-    if (player.src && titleDisplay.innerText.includes('pilih lagu')) {
-      // sangat jarang terjadi, tapi tidak bermasalah
-    }
-  });
-  
-  // inisiasi default: tidak ada lagu dipilih, player tanpa src
-  // kosongkan source awal supaya tidak error
-  player.src = "";
-  
-  // Tambahan efek kecil: saat lagu berubah karena error atau load, jaga konsistensi
-  player.addEventListener('loadeddata', () => {
-    // jika judul saat ini masih placeholder, kita bisa biarkan saja
-    if (player.src && titleDisplay.innerText === "🎵 pilih lagu favoritmu") {
-      // tidak perlu, karena fungsi putarLagu sudah mengupdate judul
-    }
-  });
+    
+    // Ketika lagu selesai diputar, biarkan judul tetap tapi hapus highlight (opsional)
+    player.addEventListener('ended', () => {
+      if (currentActiveItem) {
+        // kita biarkan highlight tetap agar user tahu lagu terakhir yang dipilih,
+        // tapi bisa diatur juga untuk menghapus setelah beberapa detik? tidak perlu.
+        titleDisplay.innerHTML = `✓ Lagu selesai | pilih lagu lain`;
+        setTimeout(() => {
+          if (titleDisplay.innerHTML.includes("selesai")) {
+            titleDisplay.innerHTML = "🎧 pilih lagu favoritmu";
+          }
+        }, 2000);
+      }
+    });
+    
+    // Jika user memainkan lagu dari kontrol audio (tanpa klik playlist), kita sync judul
+    player.addEventListener('play', () => {
+      if (player.src && !titleDisplay.innerHTML.includes(player.src)) {
+        // Kasus jarang, tetap aman
+      }
+    });
+    
+    // Inisialisasi: kosongkan source awal agar tidak error
+    player.src = "";
+    
+    // perbaikan duplikasi nomor: sudah tidak ada karena CSS otomatis nomor 1-10
+    console.log("✅ Music player siap, background kekinian + bug fixed");
+  })();
 </script>
 </body>
 </html>
