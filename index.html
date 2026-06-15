@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Music Player | Next Track</title>
+  <title>Music Player | Pencarian Lagu</title>
   <style>
     * {
       margin: 0;
@@ -141,6 +141,43 @@
       transform: scale(0.98);
     }
 
+    /* Gaya untuk fitur pencarian */
+    .search-container {
+      margin-bottom: 18px;
+      position: relative;
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #bcb0e6;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    #search-input {
+      width: 100%;
+      background: rgba(25, 20, 55, 0.7);
+      border: 1px solid rgba(160, 130, 255, 0.4);
+      border-radius: 60px;
+      padding: 12px 16px 12px 42px;
+      font-size: 0.85rem;
+      color: #f0eaff;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    #search-input:focus {
+      border-color: #b77eff;
+      box-shadow: 0 0 0 2px rgba(183, 126, 255, 0.3);
+      background: rgba(35, 28, 70, 0.85);
+    }
+    #search-input::placeholder {
+      color: #9b92bc;
+      font-weight: 400;
+    }
+
     .playlist {
       text-align: left;
       margin-top: 20px;
@@ -162,6 +199,19 @@
     .playlist h4:before {
       content: "🎵";
       font-size: 1rem;
+    }
+
+    .no-results-message {
+      background: rgba(30, 25, 65, 0.8);
+      border-radius: 40px;
+      padding: 20px 12px;
+      text-align: center;
+      color: #cdc3f0;
+      font-size: 0.85rem;
+      margin: 10px 0;
+      backdrop-filter: blur(4px);
+      border: 1px dashed #b77eff;
+      display: none;
     }
 
     .song-item {
@@ -207,6 +257,11 @@
     .song-item:nth-child(9)::before { content: "9"; font-weight: bold; background: #3a2d6e; width: 28px; border-radius: 30px; display: inline-flex; justify-content: center; }
     .song-item:nth-child(10)::before { content: "10"; font-weight: bold; background: #3a2d6e; width: 32px; border-radius: 30px; display: inline-flex; justify-content: center; }
 
+    /* class untuk menyembunyikan lagu saat filter */
+    .song-item.hidden {
+      display: none;
+    }
+
     .song-item.playing-now {
       background: linear-gradient(95deg, #5f43b0, #3d2a7a);
       border-left: 4px solid #e9b0ff;
@@ -229,6 +284,14 @@
         padding: 6px 16px;
         font-size: 0.85rem;
       }
+      #search-input {
+        padding: 10px 12px 10px 38px;
+        font-size: 0.8rem;
+      }
+      .search-icon {
+        left: 14px;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -236,7 +299,7 @@
 
 <div class="player-card">
   <h2>🎧 Music Player</h2>
-  <div class="subhead">putar · nikmati · relaks</div>
+  <div class="subhead">putar · nikmati · cari lagumu</div>
   
   <div id="current-title">✨ pilih lagu favoritmu</div>
   
@@ -249,16 +312,26 @@
   <div class="playlist">
     <h4>Daftar Lagu</h4>
     
-    <div class="song-item" data-title="Position - Ariana Grande" data-src="assets/ariana-grande-positions.mp3">Position - Ariana</div>
-    <div class="song-item" data-title="Hindia - Membasuh" data-src="assets/hindia-membasuh.mp3">Hindia - Membasuh</div>
-    <div class="song-item" data-title="Armada - Mau Dibawa Kemana" data-src="assets/mau-dibawa-kemana-armada.mp3">Armada - Mau Dibawa Kemana</div>
-    <div class="song-item" data-title="Kahitna - Titik Nadir" data-src="assets/KAHITNA-Titik Nadir.mp3">Kahitna - Titik Nadir</div>
-    <div class="song-item" data-title="Kahitna - Mantan Terindah" data-src="assets/KAHITNA-MANTAN TERINDAH.mp3">Kahitna - Mantan Terindah</div>
-    <div class="song-item" data-title="Marcell - Firasat" data-src="assets/MARCELL-Firasat.mp3">Marcell - Firasat</div>
-    <div class="song-item" data-title="ACHA & IRWANSYAH - My Heart" data-src="assets/ACHA SEPTRIASA - IRWANSYAH-My Heart.mp3">Acha & Irwansyah - My Heart</div>
-    <div class="song-item" data-title="Hello - Ular Berbisa" data-src="assets/Hello - Ular Berbisa.mp3">Hello - Ular Berbisa</div>
-    <div class="song-item" data-title="Rossa - Tak Sanggup Lagi" data-src="assets/Rossa - Tak Sanggup Lagi.mp3">Rossa - Tak Sanggup Lagi</div>
-    <div class="song-item" data-title="Raim Laode - Bersenja Gurau" data-src="assets/Bersenja Gurau - Raim Laode.mp3">Raim Laode - Bersenja Gurau</div>
+    <!-- FITUR PENCARIAN LAGU -->
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Cari judul lagu... (contoh: Kahitna, Rossa, dll)" autocomplete="off">
+    </div>
+    
+    <div id="playlist-container">
+      <div class="song-item" data-title="Position - Ariana Grande" data-src="assets/ariana-grande-positions.mp3">Position - Ariana</div>
+      <div class="song-item" data-title="Hindia - Membasuh" data-src="assets/hindia-membasuh.mp3">Hindia - Membasuh</div>
+      <div class="song-item" data-title="Armada - Mau Dibawa Kemana" data-src="assets/mau-dibawa-kemana-armada.mp3">Armada - Mau Dibawa Kemana</div>
+      <div class="song-item" data-title="Kahitna - Titik Nadir" data-src="assets/KAHITNA-Titik Nadir.mp3">Kahitna - Titik Nadir</div>
+      <div class="song-item" data-title="Kahitna - Mantan Terindah" data-src="assets/KAHITNA-MANTAN TERINDAH.mp3">Kahitna - Mantan Terindah</div>
+      <div class="song-item" data-title="Marcell - Firasat" data-src="assets/MARCELL-Firasat.mp3">Marcell - Firasat</div>
+      <div class="song-item" data-title="ACHA & IRWANSYAH - My Heart" data-src="assets/ACHA SEPTRIASA - IRWANSYAH-My Heart.mp3">Acha & Irwansyah - My Heart</div>
+      <div class="song-item" data-title="Hello - Ular Berbisa" data-src="assets/Hello - Ular Berbisa.mp3">Hello - Ular Berbisa</div>
+      <div class="song-item" data-title="Rossa - Tak Sanggup Lagi" data-src="assets/Rossa - Tak Sanggup Lagi.mp3">Rossa - Tak Sanggup Lagi</div>
+      <div class="song-item" data-title="Raim Laode - Bersenja Gurau" data-src="assets/Bersenja Gurau - Raim Laode.mp3">Raim Laode - Bersenja Gurau</div>
+    </div>
+    
+    <div id="no-results-msg" class="no-results-message">😢 Lagu tidak ditemukan, coba kata kunci lain</div>
   </div>
 </div>
 
@@ -268,8 +341,10 @@
     const titleDisplay = document.getElementById('current-title');
     const nextBtn = document.getElementById('next-button');
     const songItems = document.querySelectorAll('.song-item');
+    const searchInput = document.getElementById('search-input');
+    const noResultsDiv = document.getElementById('no-results-msg');
     
-    // Buat array daftar lagu dari DOM
+    // Buat array daftar lagu dari DOM (mempertahankan urutan asli)
     const playlist = [];
     songItems.forEach((item, idx) => {
       playlist.push({
@@ -283,7 +358,56 @@
     let currentIndex = -1;  // -1 berarti belum ada lagu yang diputar
     let currentActiveItem = null;
     
-    // Fungsi untuk memutar lagu berdasarkan index
+    // ========== FUNGSI FILTER PENCARIAN ==========
+    function filterPlaylist() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+      
+      playlist.forEach(song => {
+        const songTitle = song.title.toLowerCase();
+        const matches = keyword === '' || songTitle.includes(keyword);
+        
+        if (matches) {
+          song.element.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          song.element.classList.add('hidden');
+        }
+      });
+      
+      // Tampilkan pesan jika tidak ada hasil
+      if (visibleCount === 0 && keyword !== '') {
+        noResultsDiv.style.display = 'block';
+      } else {
+        noResultsDiv.style.display = 'none';
+      }
+    }
+    
+    // Reset pencarian (menampilkan semua lagu dan mengosongkan input)
+    function resetSearchAndShowAll() {
+      if (searchInput.value !== '') {
+        searchInput.value = '';
+        filterPlaylist();
+      } else {
+        // Jika sudah kosong, pastikan semua terlihat
+        playlist.forEach(song => {
+          song.element.classList.remove('hidden');
+        });
+        noResultsDiv.style.display = 'none';
+      }
+    }
+    
+    // Memastikan lagu yang akan diputar terlihat (jika tersembunyi karena filter, hapus filter)
+    function ensureSongVisible(song) {
+      if (song.element.classList.contains('hidden')) {
+        // Reset filter agar lagu muncul
+        resetSearchAndShowAll();
+        return true; // filter telah direset
+      }
+      return false;
+    }
+    
+    // ========== FUNGSI UTAMA PEMUTAR ==========
     function playByIndex(index) {
       if (index < 0 || index >= playlist.length) {
         // Jika sudah di luar batas, berhenti atau reset
@@ -303,7 +427,10 @@
         return;
       }
       
-      // Update highlight
+      // Jika lagu yang akan diputar sedang tersembunyi (karena filter pencarian), hapus filter dulu
+      ensureSongVisible(song);
+      
+      // Update highlight di playlist
       if (currentActiveItem) {
         currentActiveItem.classList.remove('playing-now');
       }
@@ -325,7 +452,7 @@
       }
     }
     
-    // Fungsi next: maju ke lagu berikutnya
+    // Next track: maju ke lagu berikutnya (loop ke awal jika sudah di akhir)
     function nextTrack() {
       if (currentIndex === -1) {
         // Jika belum ada lagu yang diputar, putar lagu pertama
@@ -335,26 +462,26 @@
       } else {
         let nextIdx = currentIndex + 1;
         if (nextIdx >= playlist.length) {
-          // Jika sudah di akhir, kembali ke awal (loop playlist)
-          nextIdx = 0;
+          nextIdx = 0; // loop playlist
         }
         playByIndex(nextIdx);
       }
     }
     
-    // Event listener untuk tombol next
+    // ========== EVENT LISTENERS ==========
+    // Tombol next
     nextBtn.addEventListener('click', () => {
       nextTrack();
     });
     
-    // Event listener ketika lagu selesai -> otomatis next
+    // Saat lagu selesai -> otomatis next
     player.addEventListener('ended', () => {
       if (currentIndex !== -1) {
         nextTrack();
       }
     });
     
-    // Event klik pada setiap lagu di playlist
+    // Klik pada setiap lagu di playlist
     songItems.forEach((item, idx) => {
       item.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -362,12 +489,29 @@
       });
     });
     
+    // Event listener untuk pencarian (live filter)
+    searchInput.addEventListener('input', () => {
+      filterPlaylist();
+      
+      // Opsional: jika lagu yang sedang diputar tiba-tiba terfilter (hidden), kita reset saja agar tidak bingung.
+      // Tapi karena lagu aktif sedang diputar, kita biarkan dia tetap diputar meskipun tersembunyi.
+      // Namun agar UX lebih baik, jika lagu aktif tersembunyi, kita tampilkan notifikasi kecil? Tidak perlu, cukup biarkan.
+      // Tapi jika user sengaja mencari lagu lain, tidak masalah. 
+      // Jika pengguna ingin memunculkan lagu aktif, bisa hapus pencarian.
+      // Untuk pengalaman optimal: jika lagu yang sedang diputar ter-hidden, kita tetap pertahankan pemutaran.
+      if (currentActiveItem && currentActiveItem.classList.contains('hidden')) {
+        // Lagu yang sedang diputar tersembunyi oleh filter, tapi tidak masalah, tetap berjalan.
+        // Kita hanya memberikan efek visual agar tidak bingung, kita bisa menambahkan pesan? Tidak perlu drastis.
+        // Biarkan pemutaran berjalan normal. User bisa clear search.
+      }
+    });
+    
     // Error handling jika file audio bermasalah
     player.addEventListener('error', (e) => {
       console.error('Audio error:', e);
       let errorMsg = "Gagal memuat audio. Periksa jalur file.";
       if (player.error && player.error.code === 4) {
-        errorMsg = "File tidak ditemukan. Cek folder assets.";
+        errorMsg = "File tidak ditemukan. Pastikan folder 'assets' berisi semua file mp3.";
       }
       titleDisplay.innerHTML = `⚠️ ${errorMsg}`;
       if (currentActiveItem) {
@@ -377,8 +521,20 @@
       currentIndex = -1;
     });
     
-    // Inisialisasi: kosongkan source
+    // Inisialisasi: kosongkan source, dan tampilkan semua lagu
     player.src = "";
+    
+    // Pastikan tidak ada lagu yang tersembunyi di awal
+    resetSearchAndShowAll();
+    
+    // Bonus: tambahkan tombol reset cepat (klik pada icon search? tidak perlu, tapi bisa ditambahkan efek double click pada search? biarkan)
+    // Juga agar lebih ramah: jika user menekan tombol enter di search, tidak melakukan apa-apa (biarkan filter berjalan)
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        resetSearchAndShowAll();
+        searchInput.blur();
+      }
+    });
   })();
 </script>
 </body>
