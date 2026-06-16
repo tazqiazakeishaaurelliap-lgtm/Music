@@ -25,7 +25,6 @@
             position: relative;
         }
 
-        /* efek grid modern */
         body::before {
             content: '';
             position: fixed;
@@ -41,7 +40,6 @@
             z-index: 0;
         }
 
-        /* card utama */
         .player-card {
             position: relative;
             z-index: 10;
@@ -61,7 +59,6 @@
             box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
         }
 
-        /* header */
         .player-header {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -96,7 +93,6 @@
             border: 1px solid rgba(200, 180, 255, 0.3);
         }
 
-        /* now playing */
         .now-playing-area {
             background: rgba(15, 15, 30, 0.6);
             backdrop-filter: blur(12px);
@@ -141,6 +137,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 0 2px #7f66d4, 0 0 0 4px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
         }
         .rotate {
             animation: spin 4s linear infinite;
@@ -168,7 +165,6 @@
             border-radius: 50%;
         }
 
-        /* kontrol ganda: prev + next */
         .controls-row {
             display: flex;
             justify-content: center;
@@ -204,7 +200,6 @@
             transform: scale(0.96);
         }
 
-        /* search */
         .search-container {
             margin: 1rem 0 1.2rem;
             position: relative;
@@ -237,7 +232,6 @@
             color: #938ac7;
         }
 
-        /* playlist */
         .playlist-section {
             margin-top: 0.5rem;
         }
@@ -327,7 +321,6 @@
             color: #756baa;
         }
 
-        /* responsif kecil */
         @media (max-width: 420px) {
             .ctrl-btn {
                 font-size: 0.75rem;
@@ -358,7 +351,6 @@
 
         <audio id="audio-player" controls preload="metadata"></audio>
 
-        <!-- dua tombol: Previous + Next -->
         <div class="controls-row">
             <button id="prev-button" class="ctrl-btn"><i class="fas fa-backward-step"></i> Sebelum</button>
             <button id="next-button" class="ctrl-btn"><i class="fas fa-forward-step"></i> Selanjutnya</button>
@@ -368,19 +360,19 @@
             <div class="playlist-header"><i class="fas fa-list-music"></i> Playlist</div>
             <div class="search-container">
                 <i class="fas fa-search"></i>
-                <input type="text" id="search-input" placeholder="Find the song you want to hear..." autocomplete="off">
+                <input type="text" id="search-input" placeholder="Cari lagu..." autocomplete="off">
             </div>
             <div class="playlist-list" id="playlist-container">
-                <div class="song-item" data-title="Position - Ariana Grande" data-src="assets/ariana-grande-positions.mp3">Position - Ariana</div>
+                <div class="song-item" data-title="Position - Ariana Grande" data-src="assets/ariana-grande-positions.mp3">Position - Ariana Grande</div>
                 <div class="song-item" data-title="Armada - Mau Dibawa Kemana" data-src="assets/mau-dibawa-kemana-armada.mp3">Armada - Mau Dibawa Kemana</div>
                 <div class="song-item" data-title="Marcell - Firasat" data-src="assets/MARCELL-Firasat.mp3">Marcell - Firasat</div>
-                <div class="song-item" data-title="ACHA & IRWANSYAH - My Heart" data-src="assets/ACHA SEPTRIASA - IRWANSYAH-My Heart.mp3">Acha & Irwansyah - My Heart</div>
+                <div class="song-item" data-title="ACHA & IRWANSYAH - My Heart" data-src="assets/ACHA SEPTRIASA - IRWANSYAH-My Heart.mp3">ACHA & IRWANSYAH - My Heart</div>
                 <div class="song-item" data-title="Raim Laode - Bersenja Gurau" data-src="assets/Bersenja Gurau - Raim Laode.mp3">Raim Laode - Bersenja Gurau</div>
-                <div class="song-item" data-title="Jikustik - Puisi.mp3" data-src="assets/Jikustik - Puisi.mp3">Jikustik - Puisi.mp3</div>
-                <div class="song-item" data-title="Sheila On 7 - Kita.mp3" data-src="assets/Sheila On 7 - Kita.mp3">Sheila On 7 - Kita.mp3</div>
-                <div class="song-item" data-title="Bruno Mars - Risk It All.mp3" data-src="assets/Bruno Mars - Risk It All.mp3">Bruno Mars - Risk It All.mp3</div>
-                <div class="song-item" data-title="Astrid - Terpukau.mp3" data-src="assets/Astrid - Terpukau.mp3">Astrid - Terpukau.mp3</div>
-                <div class="song-item" data-title="Nuca - Masa ini, Nanti, dan Masa Indah Lainnya.mp3" data-src="assets/Nuca - Masa ini, Nanti, dan Masa Indah Lainnya.mp3">Nuca - Masa ini, Nanti, dan Masa Indah Lainnya.mp3</div>
+                <div class="song-item" data-title="Jikustik - Puisi" data-src="assets/Jikustik - Puisi.mp3">Jikustik - Puisi</div>
+                <div class="song-item" data-title="Sheila On 7 - Kita" data-src="assets/Sheila On 7 - Kita.mp3">Sheila On 7 - Kita</div>
+                <div class="song-item" data-title="Bruno Mars - Risk It All" data-src="assets/Bruno Mars - Risk It All.mp3">Bruno Mars - Risk It All</div>
+                <div class="song-item" data-title="Astrid - Terpukau" data-src="assets/Astrid - Terpukau.mp3">Astrid - Terpukau</div>
+                <div class="song-item" data-title="Nuca - Masa ini, Nanti, dan Masa Indah Lainnya" data-src="assets/Nuca - Masa ini, Nanti, dan Masa Indah Lainnya.mp3">Nuca - Masa ini, Nanti, dan Masa Indah Lainnya</div>
             </div>
             <div id="no-results-msg" class="no-results"><i class="fas fa-binoculars"></i> Oops! lagu yang kamu cari tidak tersedia.</div>
         </div>
@@ -411,7 +403,7 @@
             let currentIdx = -1;
             let activeItem = null;
 
-            // animasi disc
+            // === DISK SPIN ===
             function setDiscSpin(playing) {
                 if (playing) disc.classList.add('rotate');
                 else disc.classList.remove('rotate');
@@ -419,9 +411,16 @@
 
             player.addEventListener('play', () => setDiscSpin(true));
             player.addEventListener('pause', () => setDiscSpin(false));
-            player.addEventListener('ended', () => setDiscSpin(false));
+            player.addEventListener('ended', () => {
+                setDiscSpin(false);
+                // otomatis next saat lagu selesai
+                if (currentIdx !== -1) {
+                    const next = getNextVisible(currentIdx);
+                    if (next !== null) playTrack(next);
+                }
+            });
 
-            // filter pencarian
+            // === SEARCH / FILTER ===
             function filterSongs() {
                 const keyword = searchInput.value.trim().toLowerCase();
                 let visible = 0;
@@ -438,23 +437,37 @@
             }
 
             function resetSearch() {
-                if (searchInput.value !== '') {
-                    searchInput.value = '';
-                    filterSongs();
-                } else {
-                    playlist.forEach(s => s.element.classList.remove('hidden'));
-                    noResults.style.display = 'none';
-                }
+                searchInput.value = '';
+                filterSongs();
             }
 
-            function ensureVisible(song) {
-                if (song.element.classList.contains('hidden')) {
-                    resetSearch();
-                    return true;
-                }
-                return false;
+            // === NAVIGASI HANYA LAGU YANG TERLIHAT ===
+            function getVisibleSongs() {
+                return playlist.filter(s => !s.element.classList.contains('hidden'));
             }
 
+            function getNextVisible(fromIdx) {
+                const visible = getVisibleSongs();
+                if (visible.length === 0) return null;
+                // cari index dari 'fromIdx' di array visible
+                const currentVisible = playlist[fromIdx];
+                if (!currentVisible) return visible[0].index;
+                const pos = visible.findIndex(s => s.index === fromIdx);
+                const nextPos = (pos + 1) % visible.length;
+                return visible[nextPos].index;
+            }
+
+            function getPrevVisible(fromIdx) {
+                const visible = getVisibleSongs();
+                if (visible.length === 0) return null;
+                const currentVisible = playlist[fromIdx];
+                if (!currentVisible) return visible[visible.length - 1].index;
+                const pos = visible.findIndex(s => s.index === fromIdx);
+                const prevPos = (pos - 1 + visible.length) % visible.length;
+                return visible[prevPos].index;
+            }
+
+            // === PLAY TRACK ===
             function playTrack(index) {
                 if (index < 0 || index >= playlist.length) {
                     titleSpan.innerHTML = "🏁 Akhir playlist | pilih lagu";
@@ -465,8 +478,14 @@
                     setDiscSpin(false);
                     return;
                 }
+
                 const song = playlist[index];
-                ensureVisible(song);
+
+                // jika lagu sedang disembunyikan oleh filter, tampilkan semua (agar user melihat konteks)
+                if (song.element.classList.contains('hidden')) {
+                    resetSearch();
+                }
+
                 if (activeItem) activeItem.classList.remove('playing');
                 song.element.classList.add('playing');
                 activeItem = song.element;
@@ -475,61 +494,67 @@
                 player.src = song.src;
                 player.load();
                 player.play().catch(e => {
-                    console.warn("autoplay ditolak", e);
+                    console.warn("autoplay ditolak, klik play", e);
                     titleSpan.innerHTML = song.title + " (klik play)";
                     setDiscSpin(false);
                 });
+
+                // scroll ke lagu yang sedang diputar
+                song.element.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
             }
 
+            // === TOMBOL NAVIGASI ===
             function nextTrack() {
                 if (currentIdx === -1) {
-                    if (playlist.length) playTrack(0);
-                } else {
-                    let next = currentIdx + 1;
-                    if (next >= playlist.length) next = 0;
-                    playTrack(next);
+                    const visible = getVisibleSongs();
+                    if (visible.length) playTrack(visible[0].index);
+                    return;
                 }
+                const next = getNextVisible(currentIdx);
+                if (next !== null) playTrack(next);
             }
 
             function prevTrack() {
                 if (currentIdx === -1) {
-                    if (playlist.length) playTrack(playlist.length - 1);
-                } else {
-                    let prev = currentIdx - 1;
-                    if (prev < 0) prev = playlist.length - 1;
-                    playTrack(prev);
+                    const visible = getVisibleSongs();
+                    if (visible.length) playTrack(visible[visible.length - 1].index);
+                    return;
                 }
+                const prev = getPrevVisible(currentIdx);
+                if (prev !== null) playTrack(prev);
             }
 
-            // event tombol
             nextBtn.addEventListener('click', nextTrack);
             prevBtn.addEventListener('click', prevTrack);
 
-            player.addEventListener('ended', () => {
-                if (currentIdx !== -1) nextTrack();
-            });
-
-            // klik item playlist
+            // === KLIK ITEM PLAYLIST ===
             songItems.forEach((item, idx) => {
                 item.addEventListener('click', () => playTrack(idx));
             });
 
-            // pencarian
+            // === SEARCH INPUT ===
             searchInput.addEventListener('input', filterSongs);
             searchInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') resetSearch();
             });
 
+            // === ERROR HANDLER ===
             player.addEventListener('error', () => {
-                let errMsg = "Gagal memuat file. Pastikan folder 'assets' berisi semua MP3.";
+                const errMsg = "Gagal memuat file. Pastikan folder 'assets' berisi semua MP3.";
                 titleSpan.innerHTML = `⚠️ ${errMsg}`;
                 if (activeItem) activeItem.classList.remove('playing');
                 activeItem = null;
                 currentIdx = -1;
                 setDiscSpin(false);
+                // coba next otomatis
+                const visible = getVisibleSongs();
+                if (visible.length) {
+                    const next = getNextVisible(visible[0].index);
+                    if (next !== null) playTrack(next);
+                }
             });
 
-            // inisialisasi
+            // === INISIALISASI ===
             resetSearch();
             player.src = "";
         })();
