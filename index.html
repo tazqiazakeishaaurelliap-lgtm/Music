@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Our Playlist | Modern & Pencarian</title>
-    <!-- Google Fonts & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -373,7 +372,7 @@
                 <div class="song-item" data-title="NUCA - MASA INI, NANTI, DAN MASA INDAH LAINNYA" data-src="assets/NUCA - MASA INI, NANTI, DAN MASA INDAH LAINNYA.mp3">NUCA - MASA INI, NANTI, DAN MASA INDAH LAINNYA</div>
                 <div class="song-item" data-title="Astrid - Terpukau" data-src="assets/Astrid - Terpukau.mp3">Astrid - Terpukau</div>
                 <div class="song-item" data-title="Armada - Mau Dibawa Kemana" data-src="assets/mau-dibawa-kemana-armada.mp3">Armada - Mau Dibawa Kemana</div>
-                <div class="song-item" data-title="Fiersa Besari - Celengan Rindu" data-src="assets/Fiersa Besari - Celengan Rindu.mp3.mp3">Fiersa Besari - Celengan Rindu</div>
+                <div class="song-item" data-title="Fiersa Besari - Celengan Rindu" data-src="assets/Fiersa Besari - Celengan Rindu.mp3">Fiersa Besari - Celengan Rindu</div>
                 <div class="song-item" data-title="ANDMESH - ANUGERAH TERINDAH" data-src="assets/ANDMESH - ANUGERAH TERINDAH.mp3">ANDMESH - ANUGERAH TERINDAH</div>
             </div>
             <div id="no-results-msg" class="no-results"><i class="fas fa-binoculars"></i> Oops! lagu yang kamu cari tidak tersedia.</div>
@@ -451,7 +450,6 @@
             function getNextVisible(fromIdx) {
                 const visible = getVisibleSongs();
                 if (visible.length === 0) return null;
-                // cari index dari 'fromIdx' di array visible
                 const currentVisible = playlist[fromIdx];
                 if (!currentVisible) return visible[0].index;
                 const pos = visible.findIndex(s => s.index === fromIdx);
@@ -483,7 +481,7 @@
 
                 const song = playlist[index];
 
-                // jika lagu sedang disembunyikan oleh filter, tampilkan semua (agar user melihat konteks)
+                // jika lagu sedang disembunyikan oleh filter, tampilkan semua
                 if (song.element.classList.contains('hidden')) {
                     resetSearch();
                 }
@@ -540,19 +538,23 @@
                 if (e.key === 'Escape') resetSearch();
             });
 
-            // === ERROR HANDLER ===
+            // === ERROR HANDLER (TELAH DIPERBAIKI) ===
             player.addEventListener('error', () => {
-                const errMsg = "Gagal memuat file. Pastikan folder 'assets' berisi semua MP3.";
+                const errMsg = "Gagal memuat file. Cek keberadaan audio di folder 'assets'.";
                 titleSpan.innerHTML = `⚠️ ${errMsg}`;
                 if (activeItem) activeItem.classList.remove('playing');
                 activeItem = null;
+                
+                const failedIdx = currentIdx; 
                 currentIdx = -1;
                 setDiscSpin(false);
-                // coba next otomatis
-                const visible = getVisibleSongs();
-                if (visible.length) {
-                    const next = getNextVisible(visible[0].index);
-                    if (next !== null) playTrack(next);
+
+                // Otomatis lompat ke lagu sesudahnya secara akurat dari lagu yang gagal tadi
+                if (failedIdx !== -1) {
+                    const next = getNextVisible(failedIdx);
+                    if (next !== null && next !== failedIdx) {
+                        playTrack(next);
+                    }
                 }
             });
 
