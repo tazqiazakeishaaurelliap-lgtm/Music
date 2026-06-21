@@ -21,32 +21,15 @@
             justify-content: center;
             align-items: center;
             padding: 1.5rem;
-            background: radial-gradient(ellipse at 20% 30%, #1b1e3a, #0d0d1a 70%);
+            /* DIUBAH: background menjadi gradien pink lembut */
+            background: linear-gradient(145deg, #fff0f0, #ffd9e6, #ffb6c1);
             position: relative;
         }
 
-        /* animated grain overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 180, 120, 0.04) 0%, transparent 60%),
-                radial-gradient(circle at 90% 80%, rgba(120, 200, 255, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* subtle grid */
+        /* efek grid & glow dinonaktifkan agar tidak mengganggu warna pink */
+        body::before,
         body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-            background-size: 48px 48px;
-            pointer-events: none;
-            z-index: 0;
+            display: none;
         }
 
         /* ── PLAYER CARD ── */
@@ -55,25 +38,21 @@
             z-index: 10;
             width: 100%;
             max-width: 480px;
-            background: rgba(18, 18, 38, 0.78);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border-radius: 3rem;
             padding: 2rem 1.8rem 1.8rem;
             box-shadow:
-                0 30px 60px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(255, 215, 150, 0.12) inset,
-                0 0 40px rgba(255, 140, 80, 0.06);
-            border: 1px solid rgba(255, 200, 160, 0.07);
+                0 30px 60px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: transform 0.25s ease, box-shadow 0.3s ease;
         }
 
         .player-card:hover {
             transform: translateY(-3px);
-            box-shadow:
-                0 40px 70px rgba(0, 0, 0, 0.7),
-                0 0 0 1px rgba(255, 215, 150, 0.18) inset,
-                0 0 60px rgba(255, 140, 80, 0.08);
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.1);
         }
 
         /* ── HEADER ── */
@@ -91,7 +70,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, #fce8d5, #ffc8a2, #ffb07a);
+            /* warna gradien tetap oranye (cocok dengan pink) */
+            background: linear-gradient(135deg, #d64b6b, #b3415a);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
@@ -99,19 +79,19 @@
 
         .player-header h1 i {
             font-size: 1.4rem;
-            color: #ffb07a;
+            color: #d64b6b;
             background: none;
         }
 
         .badge {
-            background: rgba(255, 180, 130, 0.12);
+            background: rgba(180, 60, 80, 0.12);
             backdrop-filter: blur(4px);
             padding: 0.3rem 1rem;
             border-radius: 60px;
             font-size: 0.65rem;
             font-weight: 600;
-            color: #ffccaa;
-            border: 1px solid rgba(255, 200, 150, 0.2);
+            color: #9e3e54;
+            border: 1px solid rgba(180, 60, 80, 0.15);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -120,22 +100,22 @@
         }
 
         .badge i {
-            color: #ffb07a;
+            color: #d64b6b;
         }
 
         /* ── NOW PLAYING ── */
         .now-playing-area {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 2rem;
             padding: 1.2rem 1.4rem;
             margin-bottom: 1.2rem;
-            border: 1px solid rgba(255, 200, 160, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(6px);
             transition: border-color 0.3s;
         }
 
         .now-playing-area:hover {
-            border-color: rgba(255, 200, 160, 0.18);
+            border-color: rgba(180, 60, 80, 0.2);
         }
 
         .now-label {
@@ -143,7 +123,7 @@
             text-transform: uppercase;
             letter-spacing: 2.5px;
             font-weight: 700;
-            color: #ffb07a;
+            color: #b3415a;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -152,13 +132,13 @@
 
         .now-label i {
             font-size: 0.7rem;
-            color: #ff9f6e;
+            color: #d64b6b;
         }
 
         .track-title {
             font-size: 1.15rem;
             font-weight: 700;
-            color: #f5ede6;
+            color: #2c1a1f;
             display: flex;
             align-items: center;
             gap: 14px;
@@ -167,7 +147,7 @@
         }
 
         .track-title span {
-            background: linear-gradient(135deg, #ffffff, #ffdcc5);
+            background: linear-gradient(135deg, #2c1a1f, #5a3240);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
@@ -178,15 +158,15 @@
         .disc-icon {
             width: 40px;
             height: 40px;
-            background: radial-gradient(circle at 35% 35%, #4a3a7a, #19163a);
+            background: radial-gradient(circle at 35% 35%, #ffb0c0, #d64b6b);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 0 0 2px #ffb07a, 0 0 0 5px rgba(255, 150, 90, 0.15);
+            box-shadow: 0 0 0 2px #d64b6b, 0 0 0 5px rgba(180, 60, 80, 0.15);
             font-size: 1.1rem;
-            color: #ffb07a;
+            color: white;
             transition: box-shadow 0.3s;
         }
 
@@ -212,13 +192,13 @@
         }
 
         audio::-webkit-media-controls-panel {
-            background: rgba(30, 28, 60, 0.8);
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 60px;
             backdrop-filter: blur(6px);
         }
 
         audio::-webkit-media-controls-play-button {
-            background-color: #ff9f6e;
+            background-color: #d64b6b;
             border-radius: 50%;
             transition: transform 0.2s;
         }
@@ -229,7 +209,7 @@
 
         audio::-webkit-media-controls-current-time-display,
         audio::-webkit-media-controls-time-remaining-display {
-            color: #e6d9d0;
+            color: #2c1a1f;
             font-weight: 500;
         }
 
@@ -242,9 +222,9 @@
         }
 
         .ctrl-btn {
-            background: rgba(255, 180, 130, 0.08);
-            border: 1px solid rgba(255, 200, 160, 0.15);
-            color: #f5ede6;
+            background: rgba(180, 60, 80, 0.08);
+            border: 1px solid rgba(180, 60, 80, 0.15);
+            color: #2c1a1f;
             font-weight: 600;
             padding: 0.65rem 1.2rem;
             border-radius: 60px;
@@ -262,17 +242,17 @@
         }
 
         .ctrl-btn i {
-            color: #ffb07a;
+            color: #d64b6b;
             font-size: 0.9rem;
             transition: transform 0.2s;
         }
 
         .ctrl-btn:hover {
-            background: rgba(255, 180, 130, 0.18);
-            border-color: rgba(255, 200, 160, 0.35);
+            background: rgba(180, 60, 80, 0.15);
+            border-color: rgba(180, 60, 80, 0.3);
             transform: translateY(-2px);
             gap: 14px;
-            box-shadow: 0 8px 20px rgba(255, 150, 90, 0.08);
+            box-shadow: 0 8px 20px rgba(180, 60, 80, 0.08);
         }
 
         .ctrl-btn:hover i {
@@ -294,19 +274,19 @@
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #ffb07a;
+            color: #d64b6b;
             font-size: 0.85rem;
             opacity: 0.7;
         }
 
         #search-input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 200, 160, 0.12);
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(180, 60, 80, 0.15);
             border-radius: 60px;
             padding: 0.8rem 1rem 0.8rem 2.8rem;
             font-size: 0.85rem;
-            color: #f5ede6;
+            color: #2c1a1f;
             font-weight: 500;
             outline: none;
             transition: all 0.3s ease;
@@ -314,13 +294,13 @@
         }
 
         #search-input:focus {
-            border-color: rgba(255, 180, 130, 0.5);
-            box-shadow: 0 0 0 4px rgba(255, 180, 130, 0.08), 0 0 20px rgba(255, 150, 90, 0.04);
-            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(180, 60, 80, 0.4);
+            box-shadow: 0 0 0 4px rgba(180, 60, 80, 0.05), 0 0 20px rgba(180, 60, 80, 0.02);
+            background: rgba(255, 255, 255, 0.7);
         }
 
         #search-input::placeholder {
-            color: rgba(255, 220, 200, 0.35);
+            color: rgba(44, 26, 31, 0.3);
             font-weight: 400;
         }
 
@@ -335,7 +315,7 @@
             gap: 10px;
             font-size: 0.75rem;
             font-weight: 700;
-            color: #ffccaa;
+            color: #9e3e54;
             margin-bottom: 0.8rem;
             padding-left: 4px;
             letter-spacing: 0.5px;
@@ -343,7 +323,7 @@
         }
 
         .playlist-header i {
-            color: #ffb07a;
+            color: #d64b6b;
             font-size: 0.85rem;
         }
 
@@ -352,7 +332,7 @@
             overflow-y: auto;
             padding-right: 4px;
             scrollbar-width: thin;
-            scrollbar-color: rgba(255, 180, 130, 0.25) transparent;
+            scrollbar-color: rgba(180, 60, 80, 0.25) transparent;
         }
 
         .playlist-list::-webkit-scrollbar {
@@ -365,12 +345,12 @@
         }
 
         .playlist-list::-webkit-scrollbar-thumb {
-            background: rgba(255, 180, 130, 0.25);
+            background: rgba(180, 60, 80, 0.25);
             border-radius: 10px;
         }
 
         .playlist-list::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 180, 130, 0.4);
+            background: rgba(180, 60, 80, 0.4);
         }
 
         /* ── SONG ITEM ── */
@@ -379,14 +359,14 @@
             align-items: center;
             gap: 14px;
             padding: 0.7rem 1rem 0.7rem 1.2rem;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(4px);
             margin-bottom: 8px;
             border-radius: 60px;
             cursor: pointer;
             transition: all 0.25s ease;
-            border: 1px solid rgba(255, 200, 160, 0.05);
-            color: rgba(245, 237, 230, 0.8);
+            border: 1px solid rgba(180, 60, 80, 0.06);
+            color: #2c1a1f;
             font-weight: 500;
             font-size: 0.82rem;
             position: relative;
@@ -396,7 +376,7 @@
             width: 26px;
             text-align: center;
             font-size: 0.9rem;
-            color: rgba(255, 180, 130, 0.3);
+            color: rgba(180, 60, 80, 0.3);
             transition: all 0.3s;
             flex-shrink: 0;
         }
@@ -409,25 +389,25 @@
         }
 
         .song-item:hover {
-            background: rgba(255, 180, 130, 0.08);
-            border-color: rgba(255, 200, 160, 0.15);
+            background: rgba(180, 60, 80, 0.08);
+            border-color: rgba(180, 60, 80, 0.15);
             transform: translateX(4px);
-            color: #f5ede6;
+            color: #1a0e12;
         }
 
         .song-item:hover i {
-            color: rgba(255, 180, 130, 0.7);
+            color: rgba(180, 60, 80, 0.7);
         }
 
         .song-item.playing {
-            background: linear-gradient(95deg, rgba(255, 180, 130, 0.15), rgba(255, 140, 80, 0.06));
-            border-color: rgba(255, 200, 160, 0.3);
-            box-shadow: 0 0 20px rgba(255, 150, 90, 0.04);
-            color: #ffffff;
+            background: linear-gradient(95deg, rgba(180, 60, 80, 0.15), rgba(214, 75, 107, 0.05));
+            border-color: rgba(180, 60, 80, 0.25);
+            box-shadow: 0 0 20px rgba(180, 60, 80, 0.04);
+            color: #1a0e12;
         }
 
         .song-item.playing i {
-            color: #ffb07a;
+            color: #d64b6b;
         }
 
         .song-item.playing::before {
@@ -437,7 +417,7 @@
             top: 20%;
             height: 60%;
             width: 3px;
-            background: linear-gradient(180deg, #ffb07a, #ff8a5c);
+            background: linear-gradient(180deg, #d64b6b, #a33b52);
             border-radius: 4px;
         }
 
@@ -447,19 +427,19 @@
 
         /* ── NO RESULTS ── */
         .no-results {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 60px;
             padding: 1.2rem;
             text-align: center;
-            color: rgba(245, 237, 230, 0.5);
+            color: rgba(44, 26, 31, 0.5);
             font-size: 0.8rem;
-            border: 1px dashed rgba(255, 200, 160, 0.12);
+            border: 1px dashed rgba(180, 60, 80, 0.15);
             display: none;
             margin-top: 0.5rem;
         }
 
         .no-results i {
-            color: #ffb07a;
+            color: #d64b6b;
             margin-right: 8px;
             opacity: 0.6;
         }
@@ -469,7 +449,7 @@
             font-size: 0.6rem;
             text-align: center;
             margin-top: 1.6rem;
-            color: rgba(255, 220, 200, 0.2);
+            color: rgba(44, 26, 31, 0.25);
             letter-spacing: 0.5px;
             display: flex;
             justify-content: center;
@@ -478,7 +458,7 @@
         }
 
         footer i {
-            color: rgba(255, 180, 130, 0.2);
+            color: rgba(180, 60, 80, 0.2);
             font-size: 0.7rem;
         }
 
